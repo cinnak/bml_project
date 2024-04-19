@@ -1,19 +1,22 @@
+from pathlib import Path
+import os
+
+import django
+from django.urls import path
 from django.conf import settings
 from django.http import HttpResponse
 from django.urls import path
 from django.core.handlers.wsgi import WSGIHandler
 from django.core.management import execute_from_command_line
+from django.shortcuts import render
 
-settings.configure(
-    # __name__ 指的是当前文件
-    ROOT_URLCONF=__name__,
-    DEBUG=True,
-    # SECRET_KEY 用于帮助确保项目在部署时的安全
-    SECRET_KEY="my-secret-key",
-)
+# Load settings.
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
+django.setup()
+
 
 def index(request):
-    return HttpResponse("BlogMaker Lite")
+    return render(request, "index.html")
 
 urlpatterns = [
     path("", index)
