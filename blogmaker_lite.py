@@ -1,29 +1,21 @@
 from pathlib import Path
-import os
 
-import django
-from django.urls import path
-from django.conf import settings
-from django.http import HttpResponse
 from django.urls import path
 from django.core.handlers.wsgi import WSGIHandler
-from django.core.management import execute_from_command_line
 from django.shortcuts import render
+from django.contrib import admin
 
-# Load settings.
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
-django.setup()
-
+from blogs.models import Blog
+admin.site.register(Blog)
 
 def index(request):
     return render(request, "index.html")
 
 urlpatterns = [
+    path("admin/", admin.site.urls),
     path("", index)
 ]
 
-# web server gateway interface
 application = WSGIHandler()
-
-if __name__ == "__main__":
-    execute_from_command_line()
+for x in admin.site.urls:
+    print(x)
