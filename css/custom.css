@@ -27,3 +27,7 @@
 .card {
     margin-bottom: 15px;
 }
+.post-body {
+    padding-left: 15px;
+    padding-right: 15px;
+}
