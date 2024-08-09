@@ -38,10 +38,11 @@
           {% csrf_token %}
           <button class="button outline">Log out</button>
         </form>
-    
+
       {% else %}
         <a href="{% url 'accounts:login' %}">Log in</a>
-      {% endif %}
+        <a href="{% url 'accounts:register' %}">Register</a>
+    {% endif %}
     </div>
     
 
