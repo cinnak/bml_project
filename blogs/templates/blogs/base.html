@@ -16,35 +16,26 @@
     <nav class="nav">
       <div class="nav-left">
         <a class="active" href="{% url 'blogs:index' %}">BlogMaker Lite</a>
-        <a href="{% url 'blogs' %}">All blogs</a>
+        <a href="{% url 'blogs:blogs' %}">All blogs</a>
+      </div>
+
+      <div class="nav-right">
+        {% if user.is_authenticated %}
+          <span class="is-vertical-align">
+            Hello, {{ user.username }}.</span>
+
+          <form action="{% url 'accounts:logout' %}" method="post"
+              class="is-vertical-align">
+            {% csrf_token %}
+            <button class="button outline">Log out</button>
+          </form>
+
+        {% else %}
+          <a href="{% url 'accounts:login' %}">Log in</a>
+          <a href="{% url 'accounts:register' %}">Register</a>
+        {% endif %}
       </div>
     </nav>
-
-    <div class="nav-right">
-      {% if user.is_authenticated %}
-      <span class="is-vertical-align">Hello, {{ user.username }}.</span>
-      {% else %}
-        <a href="{% url 'accounts:login' %}">Log in</a>
-      {% endif %}
-    </div>
-
-    <div class="nav-right">
-      {% if user.is_authenticated %}
-        <span class="is-vertical-align">
-          Hello, {{ user.username }}.</span>
-    
-        <form action="{% url 'accounts:logout' %}" method="post"
-            class="is-vertical-align">
-          {% csrf_token %}
-          <button class="button outline">Log out</button>
-        </form>
-
-      {% else %}
-        <a href="{% url 'accounts:login' %}">Log in</a>
-        <a href="{% url 'accounts:register' %}">Register</a>
-    {% endif %}
-    </div>
-    
 
     <div class="container">
       {% block content %}{% endblock content %}

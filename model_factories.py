@@ -1,10 +1,13 @@
 import factory
 from faker import Faker
-from random import randint
+from django.contrib.auth.models import User
+from random import choice, randint
 
 from blogs.models import Blog, BlogPost
 fake = Faker()
-
+def get_blog_owner():
+    users = User.objects.all()
+    return choice(users)
 
 def get_title():
     return " ".join(fake.words()).title()

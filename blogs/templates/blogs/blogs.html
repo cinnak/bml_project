@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "blogs/base.html" %}
 
 {% block content %}
 
@@ -6,14 +6,16 @@
 
   {% for blog in blogs %}
 
-  <div class="card">
-    <header>
-      <h3>
-        <a href="{% url 'blog' blog.id %}">{{ blog.title }}</a>
-      </h3>
-    </header>
-    <p>{{ blog.description }}</p>
-  </div>
+    <div class="card">
+      <header>
+        <h3>
+          <a href="{% url 'blogs:blog' blog.id %}">{{ blog.title }}</a>
+        </h3>
+      </header>
+      <p>{{ blog.description }}</p>
+      <p class="text-right">{{ blog.owner.username }}</p>
+    </div>
+    
   {% empty %}
     <h3>No blogs have been added yet.</h3>
   {% endfor %}
